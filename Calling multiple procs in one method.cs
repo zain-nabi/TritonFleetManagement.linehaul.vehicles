@@ -1,8 +1,9 @@
-public async Task<BookingsModel> GetByIdAsync(int bookingsID)
+public async Task<BookingsModel> GetByIdAsync(int bookingsID, Bookings model)
         {
             await using var connection = DBConnection.GetOpenConnection(_config.GetConnectionString(StringHelpers.Database.TritonFleetManagement));
 
-            const string sql = "EXEC TritonFleetManagement.dbo.proc_Bookings_GetBookingsByID @BookingsID " +
+            const string sql = "EXEC TritonFleetManagement.dbo.proc_Bookings_Insert model " +
+                               "EXEC TritonFleetManagement.dbo.proc_Bookings_GetBookingsByID @BookingsID " +
                                "EXEC [TritonFleetManagement].[dbo].[proc_Vehicle_Select]" +
                                "EXEC [TritonFleetManagement].[dbo].[proc_Customer_Select]" +
                                "EXEC [TritonGroup].[dbo].[proc_LookUpCodes_ByCategoryID_Select] 83 " +
